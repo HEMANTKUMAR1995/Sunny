@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Todo from "./Components/Todo";
+import { useEffect } from "react";
+import { fetchApi } from "./Action/Action";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  let dispatch = useDispatch();
+  let users = useSelector((state) => state.users);
+
+  useEffect(() => {
+    dispatch(fetchApi());
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <COunterOne/>
+    <Fetch/> */}
+      {/* <FetchRandomApi/> */}
+      {/* <Fetch2/> */}
+      <Todo />
+      {users.map((val, idx) => {
+        return <li key={idx}>{val.name}</li>;
+      })}
     </div>
   );
 }
